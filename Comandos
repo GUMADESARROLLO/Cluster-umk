@@ -9,11 +9,11 @@ sudo mv ./kind /usr/local/bin/kind
 kind delete cluster
 
 
-RESOLVERLO CON MINIKUBE CON UN CLUSTER CON DOS NODOS
+RESOLVERLO CON MINIKUBE CON UN CLUSTER CON TRES NODOS
 
 docker network create --driver=bridge --subnet=192.168.1.0/24 --gateway=192.168.1.1 minikube
 
-minikube start --nodes 3 -p cluster-umk --driver=docker --network=minikube  
+minikube start --nodes 2 -p cluster-umk --driver=docker --network=minikube  
 
 minikube addons enable ingress portainer metallb && minikube addons configure metallb
 
