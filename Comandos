@@ -1,4 +1,5 @@
 https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.0.1/deploy/static/provider/baremetal/deploy.yaml
+
 kind create cluster --config kind-config.yaml
 
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.15.0/kind-linux-amd64
@@ -6,3 +7,13 @@ chmod +x ./kind
 sudo mv ./kind /usr/local/bin/kind
 
 kind delete cluster
+
+
+docker network create --driver=bridge --subnet=192.168.1.0/24 --gateway=192.168.1.1 minikube
+
+minikube start --nodes 2 -p cluster-umk --driver=docker --network=minikube  
+
+minikube addons enable ingress portainer metallb && minikube addons configure metallb
+
+
+kubectl get pods -n ingress-nginx
